@@ -15,7 +15,7 @@ public class Employee {
     private Double salary;
 
     @ManyToOne
-    @JoinColumn(name = "department_id")// le nom de la column du FK
+    @JoinColumn(name = "department_id",nullable = false)// le nom de la column du FK
     private Department department;
 
     public Employee(){};

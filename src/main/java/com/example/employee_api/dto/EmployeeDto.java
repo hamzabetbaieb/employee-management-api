@@ -11,15 +11,7 @@ public class EmployeeDto {
     @Column(unique = true)
     private String email;
     private Double salary;
-
-    /*public Employee(){};
-
-    public Employee(Long id, String name, String email, Double salary) {
-        Id = id;
-        Name = name;
-        Email = email;
-        Salary = salary;
-    }*/
+    private Long departmentId;
 
     public String getName() {
         return name;
@@ -43,5 +35,13 @@ public class EmployeeDto {
 
     public void setSalary(Double salary) {
         this.salary = salary;
+    }
+
+    public Long getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(Long departmentId) {
+        this.departmentId = departmentId;
     }
 }
