@@ -1,6 +1,8 @@
 package com.example.employee_api.service;
 
 import com.example.employee_api.entity.Department;
+import com.example.employee_api.exception.DepartmentNotFoundException;
+import com.example.employee_api.exception.DuplicateResourceException;
 import com.example.employee_api.repository.DepartmentRepository;
 import org.springframework.stereotype.Service;
 
@@ -22,12 +24,12 @@ public class DepartmentService {
     }
 
     public Department getDepartmentById(Long id){
-        Department department = departmentRepository.findById(id).orElseThrow(()-> new RuntimeException("Department not found"));
+        Department department = departmentRepository.findById(id).orElseThrow(()-> new DepartmentNotFoundException("Department not found"));
         return department;
     }
     public Department createDepartment (Department department ){
       if (departmentRepository.findByName(department.getName())!=null){
-          throw new RuntimeException("department already exists");
+          throw new DuplicateResourceException("department already exists");
       }
         if (department.getName() == null || department.getName().isBlank()) {
             throw new IllegalArgumentException("Department name cannot be empty");
@@ -38,7 +40,7 @@ public class DepartmentService {
 
     }
     public void deleteDepartment (Long id){
-        Department department = departmentRepository.findById(id).orElseThrow(()-> new RuntimeException("department not found"));
+        Department department = departmentRepository.findById(id).orElseThrow(()-> new DepartmentNotFoundException("department not found"));
         departmentRepository.delete(department);
         System.out.println("department deleted successfully");
     }
